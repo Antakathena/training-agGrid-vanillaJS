@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <title>JavaScript example</title>
+    <meta charSet="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="node_modules/ag-grid-community/styles/ag-grid.css">
+    <link rel="stylesheet" href="node_modules/ag-grid-community/styles/ag-theme-alpine.css">
+</head>
+<body>
+    <H1>Some Graph with AG-grid</H1>
+    <div id="myGrid" style="height: 150px; width: 600px;" class="ag-theme-alpine"></div>
+    <div id="myChart" style="height: 500px; width: 600px;">Charts?</div>
+
+    <script src="node_modules/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="node_modules/ag-charts-community/dist/ag-charts-community.min.js"></script>
+
+    <script>
+        const data = [
+                { category: "A", value: 10 },
+                { category: "B", value: 20 },
+                { category: "C", value: 15 },
+            ]
+        const gridOptions = {
+            columnDefs: [
+                { headerName: "Category", field: "category" },
+                { headerName: "Value", field: "value" }
+            ],
+            defaultColDef: {
+                flex: 1,
+                sortable: true,
+                filter: true,
+            },
+            rowData: data,
+        }
+
+        const gridDiv = document.querySelector("#myGrid");
+        new agGrid.Grid(gridDiv, gridOptions);
+
+        const chartDiv = document.querySelector("#myChart");
+
+        console.log('agCharts :', agCharts);
+        console.log('chartDiv :', chartDiv)
+
+        agCharts.AgChart.create({
+            container: chartDiv,
+            data: [
+                { category: "A", value: 10 },
+                { category: "B", value: 20 },
+                { category: "C", value: 15 },
+            ],
+            series: [{
+                type: 'column',
+                xKey: 'category',
+                yKey: 'value',
+            }],
+        })
+    </script>
+</body>
+</html>
